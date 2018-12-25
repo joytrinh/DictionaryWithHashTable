@@ -14,16 +14,20 @@ namespace dictionary
         static void Main(string[] args)
         {
             Hashtable dict = new Hashtable();
+
+            //1. Calls load on the dictionary file
             string word = "";
             while (word != " ")
             {
                 Console.WriteLine("Add a word: ");
-                word = Console.ReadLine();
-                bool success = Regex.IsMatch(word, @"^[a-zA-Z]+$");
+                word = Console.ReadLine().ToLower().Trim();//Lower all letters and trim irrelevant spaces
+
+                //Dictionary contains valid words
+                bool success = Regex.IsMatch(word, @"^[a-zA-Z]\[']+$");
                 if (success)
                     dict.Add(word[0].ToString(), word);
                 else
-                    Console.WriteLine("Please enter letters only!");
+                    Console.WriteLine("Please enter words with letters only!");
             };
             ICollection keys = dict.Keys;
             using (StreamWriter file = new StreamWriter(@"E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary.txt"))
@@ -34,6 +38,7 @@ namespace dictionary
                 }
             }                
             
+            //
         }
     }
     class Node
