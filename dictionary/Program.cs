@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace dictionary
 {
@@ -12,19 +14,26 @@ namespace dictionary
         static void Main(string[] args)
         {
             Hashtable dict = new Hashtable();
-            string word;
-            do
+            string word = "";
+            while (word != " ")
             {
                 Console.WriteLine("Add a word: ");
                 word = Console.ReadLine();
-                dict.Add(word[0].ToString(), word);
-            } while (word != "-1");
+                bool success = Regex.IsMatch(word, @"^[a-zA-Z]+$");
+                if (success)
+                    dict.Add(word[0].ToString(), word);
+                else
+                    Console.WriteLine("Please enter letters only!");
+            };
             ICollection keys = dict.Keys;
-            foreach (string k in keys)
+            using (StreamWriter file = new StreamWriter(@"E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary.txt"))
             {
-                Console.WriteLine(k + ": " + dict[k]);
-            }
-            Console.ReadKey();
+                foreach (string k in keys)
+                {
+                    file.WriteLine(k + ": " + dict[k]);
+                }
+            }                
+            
         }
     }
     class Node

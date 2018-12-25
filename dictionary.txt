@@ -1,0 +1,3 @@
+f: father
+h: hash
+m: mother
