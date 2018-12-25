@@ -13,19 +13,16 @@ namespace dictionary
         {
             Hashtable dict = new Hashtable();
             string word;
-            int key = 0;
             do
             {
                 Console.WriteLine("Add a word: ");
                 word = Console.ReadLine();
-                byte[] bytes = Encoding.ASCII.GetBytes(word);
-
-                dict.Add(key, word);
+                dict.Add(word[0].ToString(), word);
             } while (word != "-1");
             ICollection keys = dict.Keys;
             foreach (string k in keys)
             {
-                Console.WriteLine(dict[k]);
+                Console.WriteLine(k + ": " + dict[k]);
             }
             Console.ReadKey();
         }
