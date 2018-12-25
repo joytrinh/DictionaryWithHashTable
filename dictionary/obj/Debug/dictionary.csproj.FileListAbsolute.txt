@@ -1,0 +1,7 @@
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\bin\Debug\dictionary.exe.config
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\bin\Debug\dictionary.exe
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\bin\Debug\dictionary.pdb
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\obj\Debug\dictionary.csprojAssemblyReference.cache
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\obj\Debug\dictionary.csproj.CoreCompileInputs.cache
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\obj\Debug\dictionary.exe
+E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary\obj\Debug\dictionary.pdb
