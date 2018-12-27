@@ -1,3 +1,26 @@
-f: father
-h: hash
-m: mother
+0: a -> 0: add -> 
+1: bee -> 1: bucket -> 
+
+
+
+
+
+
+8: input -> 
+
+
+
+
+
+
+15: pet -> 15: put -> 
+
+
+
+
+
+
+22: word -> 
+
+
+

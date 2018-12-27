@@ -19,14 +19,14 @@ namespace dictionary
             while (word != " ")
             {
                 Console.WriteLine("Please input a word: ");
-                word = Console.ReadLine().Trim().ToLower();
-                bool success = Regex.IsMatch(word, @"^[a-zA-Z]+$");
+                word = Console.ReadLine().Trim().ToLower();//Make sure that input words have no relevant space and their letters are lower
+                bool success = Regex.IsMatch(word, @"^[a-zA-Z]+$");//Make sure that input words only contains letters
                 if (success)
                     hash.insert(word);
                 else
-                    break;                               
+                    break;//You can type " " to stop the while loop if you don't want to add words                               
             }
-            hash.print();
+            hash.write();//Print the dictionary
             Console.ReadLine();
         }
     }
@@ -49,7 +49,7 @@ namespace dictionary
             }
             set
             {
-                if (value >= 0 && value <= 25)
+                if (value >= 0 && value <= 25) 
                 {
                     _key = value;
                 }
@@ -63,7 +63,7 @@ namespace dictionary
             }
             set
             {
-                if (value != "")
+                if (value != "" && Regex.IsMatch(word, @"^[a-zA-Z]+$"))
                 {
                     _word = value;
                 }
@@ -90,11 +90,12 @@ namespace dictionary
             this.size = size;
             hashTable = new hashNode[size];
             for (int i = 0; i < size; i++)
-                hashTable[i] = null;//First, set all indexes of hashTabe null value
+                hashTable[i] = null;//Initial value of all hashNodes is null
         }
         public void insert(string word)
         {
-            int key = word[0] - 97;
+            int key = word[0] - 97;//Value of "a" in ASCII table is 97, we want to create
+            //an array with indexes from 0 to 25 (because we have 26 alphabet letters)
             hashNode hn = new hashNode(key, word);
             if (hashTable[key] == null)
                 hashTable[key] = hn;
@@ -102,6 +103,33 @@ namespace dictionary
             {
                 hn.next = hashTable[key];
                 hashTable[key] = hn;
+            }
+        }
+        public void write()
+        {
+            string filepath = @"E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary.txt";
+            FileStream fs = null;
+            try
+            {
+                fs = new FileStream(filepath, FileMode.Append);
+                using (StreamWriter writer = new StreamWriter(fs))
+                {
+                    hashNode current = null;
+                    for (int i = 0; i < size; i++)
+                    {
+                        current = hashTable[i];
+                        while (current != null)
+                        {
+                            writer.Write(current.key + ": " + current.word + " -> ");
+                            current = current.next;
+                        }
+                        writer.WriteLine();
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
         }
         public void print()
