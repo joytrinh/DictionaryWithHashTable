@@ -29,7 +29,7 @@ namespace dictionary
             hash.write();//Print the dictionary
             Console.WriteLine("Please write a word you would like to find: ");
             string s = Console.ReadLine();
-            hash.check(s);
+            hash.scan(s);
             Console.ReadLine();
         }
     }
@@ -86,8 +86,9 @@ namespace dictionary
     }
     class FixedSizeHashTable
     {
-        private int size;
+        private int size;        
         hashNode[] hashTable;
+        string filepath = @"E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary.txt";
         public FixedSizeHashTable(int size)
         {
             this.size = size;
@@ -110,7 +111,6 @@ namespace dictionary
         }
         public void write()
         {
-            string filepath = @"E:\STUDY\IT\Self-Study\C#\CS50\dictionary\dictionary.txt";
             FileStream fs = null;
             try
             {
@@ -123,10 +123,9 @@ namespace dictionary
                         current = hashTable[i];
                         while (current != null)
                         {
-                            writer.Write(current.key + ": " + current.word + " -> ");
+                            writer.WriteLine(current.word);
                             current = current.next;
                         }
-                        writer.WriteLine();
                     }
                 }
             }
@@ -135,22 +134,45 @@ namespace dictionary
                 throw;
             }
         }
+        public void scan(string s)
+        {
+            using (StreamReader reader = new StreamReader(filepath))
+            {
+                while (true)
+                {
+                    string line = reader.ReadLine();
+                    if (line == s)
+                    {
+                        Console.WriteLine("Found the word " + s);
+                        break;
+                    }
+                    else
+                    {
+                        Console.WriteLine("The word " + s + " is not found");
+                        break;
+                    }
+                }                
+            }
+        }
         public void check(string s)
         {
             int a = s[0] - 97;
             hashNode cursor = hashTable[a];
             bool result = false;
-            while (cursor != null)
+            if (cursor != null)
             {
                 while (cursor.word != s)
                 {
-
+                    cursor = cursor.next;
+                    if (cursor.word == s)
+                    {
+                        result = true;
+                        break;
+                    }
                 }
-                if (hashTable[a].word == s)
-                    result = true;
-                else
-                    hashTable[a] = hashTable[a].next;
             }
+            else
+                result = false;
             if (result)
                 Console.WriteLine("The word " + s + " is found in the dictionary");
             else
