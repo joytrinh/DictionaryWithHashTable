@@ -27,6 +27,9 @@ namespace dictionary
                     break;//You can type " " to stop the while loop if you don't want to add words                               
             }
             hash.write();//Print the dictionary
+            Console.WriteLine("Please write a word you would like to find: ");
+            string s = Console.ReadLine();
+            hash.check(s);
             Console.ReadLine();
         }
     }
@@ -131,6 +134,27 @@ namespace dictionary
             {
                 throw;
             }
+        }
+        public void check(string s)
+        {
+            int a = s[0] - 97;
+            hashNode cursor = hashTable[a];
+            bool result = false;
+            while (cursor != null)
+            {
+                while (cursor.word != s)
+                {
+
+                }
+                if (hashTable[a].word == s)
+                    result = true;
+                else
+                    hashTable[a] = hashTable[a].next;
+            }
+            if (result)
+                Console.WriteLine("The word " + s + " is found in the dictionary");
+            else
+                Console.WriteLine("The word " + s + " is NOT found");
         }
         public void print()
         {
