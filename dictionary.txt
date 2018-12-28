@@ -1,3 +1,25 @@
-f: father
-h: hash
-m: mother
+apple
+father
+lemon
+mother
+orange
+water
+watermelon
+sit
+table
+time
+input
+worth
+word
+table
+time
+thin
+table
+time
+time
+table
+time
+table
+time
+table
+tent
