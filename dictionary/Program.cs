@@ -30,6 +30,7 @@ namespace dictionary
             Console.WriteLine("Please write a word you would like to find: ");
             string s = Console.ReadLine();
             hash.scan(s);
+            hash.free();
             Console.ReadLine();
         }
     }
@@ -161,7 +162,7 @@ namespace dictionary
             bool result = false;
             if (cursor != null)
             {
-                while (cursor.word != s)
+                while (true)
                 {
                     cursor = cursor.next;
                     if (cursor.word == s)
@@ -177,6 +178,20 @@ namespace dictionary
                 Console.WriteLine("The word " + s + " is found in the dictionary");
             else
                 Console.WriteLine("The word " + s + " is NOT found");
+        }
+        public void free()
+        {
+            hashNode current = null;
+            for (int i = 0; i < size; i++)
+            {
+                current = hashTable[i];
+                while (current != null)
+                {
+                    hashNode tmp = current;
+                    current = current.next;
+                    GC.Collect();
+                }
+            }
         }
         public void print()
         {
